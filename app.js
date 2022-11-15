@@ -43,6 +43,8 @@ const secret = process.env.SECRET || 'KingOfThePirates'
 
 app.use(session({
     secret,
+    saveUninitialized: false,
+    resave: false,
     store: MongoStore.create({
         mongoUrl: dbUrl,
         touchAfter: 24 * 3600
@@ -51,7 +53,7 @@ app.use(session({
 
 const sessionConfig = {
     secret,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
@@ -99,6 +101,7 @@ app.use((err, req, res, next) => {
 
 })
 
-app.listen(3001, () => {
-    console.log("Yes Working")
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`)
 })  
