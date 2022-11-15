@@ -7,7 +7,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const session = require('cookie-session');
+const session = require('express-session');
 const flash = require('connect-flash')
 const ExpressError = require('./Utilities/ExpressError');
 const methodOverride = require('method-override');
@@ -43,7 +43,7 @@ const secret = process.env.SECRET || 'KingOfThePirates'
 
 app.use(session({
     secret,
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: false,
     store: MongoStore.create({
         mongoUrl: dbUrl,
